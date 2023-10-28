@@ -1,0 +1,35 @@
+﻿@page "/AddItem"
+@inject ICatalog _catalog
+
+<MudCard Style=" display: flex; flex-direction: column; width:220px; height:350px;">
+    <MudCardContent>
+        <MudTextField @bind-Value="Id" Label="Id" Variant="Variant.Text"></MudTextField>
+        <MudTextField @bind-Value="Name" Label="Название" Variant="Variant.Text"></MudTextField>
+        <MudTextField @bind-Value="Description" Label="Описание" Variant="Variant.Text"></MudTextField>
+        <MudNumericField @bind-Value="Cost" Label="Цена" Step="0.01m" Variant="Variant.Text"></MudNumericField>
+    </MudCardContent>
+    <MudButton @onclick="@(e =>@AddNewItem(Id,Name,Description,Cost))" Style="margin-top: auto; margin-bottom:10px; margin-left:10px; margin-right:10px;" Variant="Variant.Filled" Color="Color.Primary">
+        Добавить в каталог
+    </MudButton>
+</MudCard>
+
+@code {
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public decimal Cost { get; set; }
+    public void AddNewItem(string id, string name, string description, decimal cost)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+            return;
+        if (string.IsNullOrWhiteSpace(name))
+            return;
+        if (string.IsNullOrWhiteSpace(description))
+            return;
+        if (cost < 0)
+            return;
+        var guid = new Guid(id);
+
+        _catalog.Add(new Item(guid, name, description, cost));
+    }
+}

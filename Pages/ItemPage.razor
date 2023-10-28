@@ -1,0 +1,31 @@
+﻿@page "/Items/{ItemId:guid}"
+@inject ICatalog _catalog
+
+<MudCard Style=" display: flex; flex-direction: column; width:220px; height:300px;">
+    <MudCardHeader>
+        <NavLink href="@($"Items/{_item.Id}")">
+            @_item.Name
+        </NavLink>
+    </MudCardHeader>
+    <MudCardContent>
+        @_item.Description
+    </MudCardContent>
+    <MudCardContent Style="position:absolute; margin-top: 150px; ">
+        Цена: @_item.Cost
+    </MudCardContent>
+    <MudButton Style="margin-top: auto; margin-bottom:10px; margin-left:10px; margin-right:10px;" Variant="Variant.Filled" Color="Color.Primary">
+        Добавить в корзину(не работает)
+    </MudButton>
+</MudCard>
+
+@code {
+    [Parameter]
+    public Guid ItemId { get; set; }
+    private Item _item { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _item = _catalog.GetById(ItemId);
+    }
+}

@@ -1,0 +1,29 @@
+﻿@page "/Items"
+@inject ICatalog _catalog
+
+@foreach (var item in _catalog)
+{
+    <ItemPage ItemId="@item.Id">
+    </ItemPage>
+
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        //     _catalog.Add(new Item(
+        //         new Guid("b7b5d732-1d1a-4eb2-8d54-452f4f9e2c3a"), "Кирпичи", "Красные кирпичи для строительства стен и заборов.", 2500.00m));
+        //     _catalog.Add(new Item(
+        //         new Guid("a8e0f88d-ae24-4d2e-b78d-6c7e392f8b96"), "Доски", "Доски высшего качества для строительства полов и перекрытий.", 2500.00m));
+        //     _catalog.Add(new Item(
+        //         new Guid("c7a6e445-09d2-4b63-bd27-93d0f31f19e5"), "Цемент", "Специальный цемент для строительства фундаментов и бетонных конструкций.", 800.00m));
+        //     _catalog.Add(new Item(
+        //         new Guid("e5c9a3f0-60d3-4a3f-bd76-29e6d8dd3c25"), "Стекло-пакеты", "Стекло-пакеты для окон и дверей с хорошей теплоизоляцией.", 3000.00m));
+        //     _catalog.Add(new Item(
+        //         new Guid("d3b2e7f4-8dcf-4c4e-b181-2a7232f8ec58"), "Металлические профили", "Профили для металлических конструкций и каркасов зданий.", 1800.00m));
+        //
+    }
+}
+
+
